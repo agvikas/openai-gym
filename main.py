@@ -14,7 +14,6 @@ def main():
     parser.add_argument('--gamma', type=float, default=0.95, help='discount factor')
     parser.add_argument('--learning_rate', type=float, default=0.01, help='learning_rate')
     parser.add_argument('--batch_size', type=int, default=64, help='batch size')
-    parser.add_argument('--mode', type=str, required=True, help="training or demo")
 
     args = parser.parse_args()
     parameters = {}
@@ -50,7 +49,7 @@ def main():
 
                 next_state = next_state.reshape(-1, env.observation_space.shape[0])
                 model.add_to_memory(curr_state, action, reward, next_state, done)
-                model.replay(sess, args.mode)
+                model.replay(sess)
 
                 curr_state = next_state
                 j += 1
